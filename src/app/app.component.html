@@ -4,3 +4,14 @@
     <mat-option *ngFor="let option of options$ | async" [value]="option.id">{{option.title}}</mat-option>
   </mat-select>
 </mat-form-field>
+
+<mat-form-field>
+  <mat-label>Select</mat-label>
+  <mat-select msInfiniteScroll (infiniteScroll)="getNextBatch()" [complete]="offset === data.length">
+    <mat-option>
+      <ngx-mat-select-search [formControl]="filterCtrl" [placeholderLabel]="'Search'"
+        [noEntriesFoundLabel]="'no matching bank found'"></ngx-mat-select-search>
+    </mat-option>
+    <mat-option *ngFor="let option of options$ | async" [value]="option.id">{{option.title}}</mat-option>
+  </mat-select>
+</mat-form-field>

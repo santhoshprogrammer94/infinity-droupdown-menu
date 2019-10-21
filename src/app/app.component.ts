@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { scan } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { scan, takeUntil } from 'rxjs/operators';
 import { DataService } from './data.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +19,8 @@ export class AppComponent {
   options$: Observable<any>;
   form: FormGroup;
   isProcess: boolean;
+  public filterCtrl: FormControl = new FormControl();
+  protected _onDestroy = new Subject<void>();
 
   constructor(private _dataService: DataService, private _formBuilder: FormBuilder) {
 
@@ -30,8 +32,15 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    
     this.createForm();
     this.getNextBatch();
+
+    this.filterCtrl.valueChanges
+    .pipe(takeUntil(this._onDestroy))
+    .subscribe(() => {
+     console.log(this.filterCtrl.value);
+    });
 
 
   }

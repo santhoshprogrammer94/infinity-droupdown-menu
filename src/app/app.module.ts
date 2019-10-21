@@ -7,6 +7,7 @@ import { MatFormFieldModule, MatSelectModule } from '@angular/material';
 import {MatSelectInfiniteScrollModule} from 'ng-mat-select-infinite-scroll';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     ReactiveFormsModule,
     MatSelectInfiniteScrollModule,
+    NgxMatSelectSearchModule,
     HttpClientModule
   ],
   providers: [],
